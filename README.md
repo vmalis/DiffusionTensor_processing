@@ -16,8 +16,8 @@ There are multiple preprocessing corrections:
  
  
  Required libraries: 
-    – FSL
-    – CMTK
+  - FSL
+  - CMTK
     
     
   Vadim Malis
