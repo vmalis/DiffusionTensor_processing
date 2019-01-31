@@ -1,0 +1,69 @@
+function []=mat2amira(volume,info)
+%
+% part of diffusion tensor toolkit v2
+% function to convert tensor or magnitude image volume to amira input format
+% _____________________________________________________
+% written by Vadim Malis
+% 04/17 at UCSD RIL
+
+    %check the input type
+    if size(size(volume),2)>3 && size(size(volume),2)<5
+    
+        % create header and write to file
+        fileID = fopen('tensor.am','w');
+        header = ['# AmiraMesh BINARY-LITTLE-ENDIAN 2.1\n\n'...
+                  'define Lattice %d %d %d\n\n'...
+                  'Parameters {\n'...
+                  '\t info "symmetric 3x3 tensor with [0,0],[0,1],[0,2],[1,1],[2,2]",\n'...
+                  '\t bvalue %d,\n'...
+                  '\t ContentType "HxRegSym2TensorField3",\n'...
+                  '\t BoundingBox %.4f %.4f %.4f %.4f %.4f %.4f,\n'...
+                  '\t CoordType "uniform"\n'...
+                  '}\n\n'...
+                  'Lattice { double[6] Data } @1\n\n'...
+                  '# Data section follows\n@1\n'];
+
+        header=sprintf(header,info.nx,info.ny,info.nz,info.b,-info.x,...
+            -info.y,-info.x,-info.y,info.z(1),info.z(2));
+        fwrite(fileID,header,'char');
+        fclose(fileID);
+        
+        % append volume to header
+        fileID = fopen('tensor.am','a');
+        fwrite(fileID,permute(volume,[4,2,1,3]),'double');
+        fclose(fileID);
+        
+    
+    elseif size(size(volume),2)==3
+        
+         % create header and write to file
+        fileID = fopen('baseline.am','w');
+        header = ['# AmiraMesh BINARY-LITTLE-ENDIAN 2.1\n\n'...
+                  'define Lattice %d %d %d\n\n'...
+                  'Parameters {\n'...
+                  '\t Modality "MR",\n'...
+                  '\t Content "%dx%dx%d short, uniform coordinates",\n'...
+                  '\t BoundingBox %.4f %.4f %.4f %.4f %.4f %.4f,\n'...
+                  '\t CoordType "uniform"\n'...
+                  '}\n\n'...
+                  'Lattice { short Data } @1\n\n'...
+                  '# Data section follows\n@1\n'];
+
+        header=sprintf(header,info.nx,info.ny,info.nz,info.nx,info.ny,...
+            info.nz,-info.x,-info.y,-info.x,-info.y,info.z(1),info.z(2));
+        fwrite(fileID,header,'char');
+        fclose(fileID);
+        
+        % append volume to header
+        fileID = fopen('baseline.am','a');
+        fwrite(fileID,int16(permute(volume,[2,1,3])),'int16', 'ieee-le');
+        fclose(fileID);
+        
+    else    
+        
+     disp('ERROR: unknown format for input volume!')
+        
+    end
+
+
+end
