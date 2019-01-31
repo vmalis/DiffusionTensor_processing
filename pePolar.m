@@ -3,7 +3,7 @@
 %
 % _____________________________________________________
 % written by Vadim Malis
-% 07/18 at in Crimea RUSSIA
+% 07/18 in Crimea
 
 %% set path for CMTK
 %path1 = getenv('PATH');
