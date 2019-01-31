@@ -20,4 +20,7 @@ There are multiple preprocessing corrections:
   - CMTK
     
     
-  Vadim Malis
+Important:  add dicom dictionary provided! For more info read tutorial DTI_v2
+
+
+Vadim Malis
