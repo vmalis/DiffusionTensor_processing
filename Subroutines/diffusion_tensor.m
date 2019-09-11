@@ -32,7 +32,7 @@ end
 LN=zeros(size(DWI));
 
 for i=1:size(Grad,1),
-    LN(:,:,:,i)=log((DWI(:,:,:,i)./Baseline)+eps);
+    LN(:,:,:,i)=log((DWI(:,:,:,i)./squeeze(DWI(:,:,:,1)))+eps);
 end
 
 
