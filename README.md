@@ -6,7 +6,7 @@ Main script to run is DTI_GE or DTI_GE2volumes if the set is split into 2 parts.
 There are multiple preprocessing corrections:
   - eddy current correction from FSL
   - correction using field maps (requires field maps) optional and can be turned off inside the main script
-  – LMMSE Rician noise filterring
+  – [LMMSE Rician noise filterring](https://www.mathworks.com/matlabcentral/fileexchange/43992-joint-anisotropic-wiener-filter-for-diffusion-weighted-mri)
  
  Output files: all the colormaps, DTI_tool, DTI_Studio, Amira as well as simple .mat
  
@@ -14,8 +14,8 @@ There are multiple preprocessing corrections:
  
  
  Required libraries: 
-  - FSL
-  - CMTK
+  - [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
+  - [CMTK](https://www.nitrc.org/projects/cmtk/)
     
     
 Important:  add dicom dictionary provided! For more info read tutorial DTI_v2
