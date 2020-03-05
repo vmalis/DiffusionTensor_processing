@@ -1,5 +1,7 @@
 # DTI_processing
 
+[![DOI](https://zenodo.org/badge/168603166.svg)](https://zenodo.org/badge/latestdoi/168603166)
+
 This is the toolbox to process DTI data from GE scanner
 Main script to run is DTI_GE or DTI_GE2volumes if the set is split into 2 parts.
 
